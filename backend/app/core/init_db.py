@@ -1,5 +1,5 @@
-from backend.app.core.database import Base, engine
-from backend.app.models.land_record import LandRecord
+from .database import Base, engine
+from ..models.land_record import LandRecord
 
 
 def init_database():

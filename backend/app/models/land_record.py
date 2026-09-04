@@ -4,7 +4,7 @@ from uuid import uuid4
 from sqlalchemy import DateTime, Float, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
-from backend.app.core.database import Base
+from ..core.database import Base
 
 
 class LandRecord(Base):

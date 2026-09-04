@@ -8,23 +8,23 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import inspect, text
 
-from backend.app.core.database import SessionLocal
-from backend.app.models.land_record import LandRecord
+from .core.database import SessionLocal
+from .models.land_record import LandRecord
 
-from backend.app.services.preprocessing.processor import preprocess_document
-from backend.app.services.ocr.ocr_engine import extract_text_from_pages
-from backend.app.services.extraction.field_extractor import (
+from .services.preprocessing.processor import preprocess_document
+from .services.ocr.ocr_engine import extract_text_from_pages
+from .services.extraction.field_extractor import (
     extract_land_record_fields,
 )
-from backend.app.services.validation.validator import validate_land_record
+from .services.validation.validator import validate_land_record
 
-from backend.app.services.validation.human_review import (
+from .services.validation.human_review import (
     create_review_record,
     load_review_record,
     update_review_record,
 )
 
-from backend.app.schemas.human_review import HumanReviewRequest
+from .schemas.human_review import HumanReviewRequest
 
 
 # ==================================================

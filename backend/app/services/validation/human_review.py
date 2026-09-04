@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from backend.app.services.validation.validator import (
+from .validator import (
     validate_land_record,
 )
 
