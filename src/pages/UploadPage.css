@@ -1,0 +1,43 @@
+.upload-page input.hidden { display: none; }
+.upload-page {
+  min-height: 100vh;
+  padding: 58px 24px 72px;
+  color: #0f172a;
+  background: linear-gradient(135deg, #f8fafc 0%, #eef6f5 52%, #f8fafc 100%);
+}
+.upload-shell { width: min(920px, 100%); margin: 0 auto; }
+.upload-header { text-align: center; margin-bottom: 34px; }
+.upload-mark { width: 56px; height: 56px; margin: 0 auto 18px; display: grid; place-items: center; border-radius: 16px; color: #fff; background: #0f172a; }
+.upload-kicker { margin: 0 0 9px; color: #0f9f91; font-size: 11px; font-weight: 800; letter-spacing: .14em; }
+.upload-header h1 { margin: 0; font-size: clamp(30px, 5vw, 46px); letter-spacing: -.04em; }
+.upload-header > p:last-child { max-width: 520px; margin: 12px auto 0; color: #64748b; line-height: 1.6; }
+.upload-card { padding: 30px; border: 1px solid #dce5e6; border-radius: 22px; background: rgba(255,255,255,.92); box-shadow: 0 18px 50px rgba(15,23,42,.07); }
+.drop-zone { min-height: 290px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; border: 2px dashed #b7d4d0; border-radius: 17px; background: #f4fbfa; transition: .2s ease; }
+.drop-zone.is-dragging, .drop-zone:hover { border-color: #0f9f91; background: #ecfdf9; }
+.drop-icon { width: 64px; height: 64px; display: grid; place-items: center; margin-bottom: 18px; border-radius: 18px; color: #0f9f91; background: #fff; box-shadow: 0 8px 20px rgba(15,118,110,.1); }
+.drop-zone h2 { margin: 0; font-size: 20px; }
+.drop-zone p { margin: 8px 0 0; color: #64748b; font-size: 13px; }
+.browse-button, .upload-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 0; border-radius: 10px; font-weight: 750; transition: .2s ease; }
+.browse-button { margin-top: 19px; padding: 11px 20px; color: #fff; background: #0f172a; }
+.browse-button:hover, .upload-button:hover { background: #0f9f91; transform: translateY(-1px); }
+.drop-hint { margin-top: 12px; color: #94a3b8; font-size: 12px; }
+.selected-file { padding: 17px; border: 1px solid #cde8e3; border-radius: 14px; background: #f4fbfa; }
+.file-summary { display: flex; align-items: center; min-width: 0; gap: 13px; }
+.file-icon { width: 46px; height: 46px; display: grid; place-items: center; flex-shrink: 0; border-radius: 12px; color: #0f9f91; background: #fff; }
+.file-copy { min-width: 0; }
+.file-copy p { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
+.file-copy .file-meta { margin-top: 5px; color: #64748b; font-size: 12px; font-weight: 500; }
+.remove-button { display: grid; place-items: center; flex-shrink: 0; padding: 8px; border: 0; border-radius: 8px; color: #64748b; background: transparent; }
+.remove-button:hover { color: #b42318; background: #fff; }
+.upload-button { width: 100%; margin-top: 19px; padding: 14px 20px; color: #fff; background: #0f172a; }
+.upload-button:disabled { cursor: wait; opacity: .65; transform: none; }
+.upload-status { display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; padding: 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+.success-status { color: #166534; border: 1px solid #bbebd2; background: #f0fdf4; }
+.success-status p { margin: 0; }
+.status-id { margin-top: 4px !important; color: #16805a; font-size: 11px; word-break: break-all; }
+.error-status { color: #b42318; border: 1px solid #fecaca; background: #fff5f5; }
+.workflow-preview { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 18px; }
+.workflow-step { padding: 14px 8px; text-align: center; border: 1px solid #dce5e6; border-radius: 12px; background: #fff; }
+.workflow-number { width: 27px; height: 27px; display: grid; place-items: center; margin: 0 auto 8px; border-radius: 50%; color: #fff; background: #0f172a; font-size: 12px; font-weight: 800; }
+.workflow-step p { margin: 0; color: #64748b; font-size: 11px; font-weight: 700; }
+@media (max-width: 620px) { .upload-page { padding: 36px 16px 48px; } .upload-card { padding: 16px; border-radius: 17px; } .workflow-preview { grid-template-columns: repeat(2, 1fr); } .workflow-step:last-child { grid-column: span 2; } }

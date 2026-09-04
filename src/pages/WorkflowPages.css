@@ -1,0 +1,32 @@
+.workflow-page { min-height: 100vh; padding: 56px 24px 72px; color: #0f172a; background: linear-gradient(135deg, #f8fafc, #eef6f5 55%, #f8fafc); }
+.workflow-shell { width: min(1080px, 100%); margin: 0 auto; }
+.workflow-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.workflow-mark { width: 52px; height: 52px; display: grid; place-items: center; flex-shrink: 0; border-radius: 15px; color: #fff; background: #0f172a; }
+.workflow-kicker { margin: 0 0 6px; color: #0f9f91; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.workflow-header h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; }
+.workflow-header > div:last-child > p:last-child { margin: 8px 0 0; color: #64748b; }
+.workflow-id, .workflow-card { border: 1px solid #dce5e6; border-radius: 16px; background: rgba(255,255,255,.94); box-shadow: 0 14px 40px rgba(15,23,42,.06); }
+.workflow-id { margin-bottom: 18px; padding: 14px 17px; color: #64748b; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.workflow-id strong { display: block; margin-top: 6px; color: #0f172a; font-size: 12px; letter-spacing: 0; word-break: break-all; text-transform: none; }
+.review-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, .8fr); gap: 18px; }
+.workflow-card { padding: 24px; }
+.card-heading, .record-top, .records-toolbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.workflow-card h2 { margin: 0; font-size: 19px; }
+.workflow-card h2 + p { margin: 5px 0 0; color: #64748b; font-size: 13px; }
+.integration-tag { padding: 7px 9px; border-radius: 8px; color: #126e64; background: #e8f8f5; font-size: 10px; font-weight: 800; text-align: right; }
+.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-top: 22px; }
+.field-grid label, .review-panel label { display: flex; flex-direction: column; gap: 6px; color: #475569; font-size: 11px; font-weight: 750; }
+.field-grid input, .review-panel input, .review-panel textarea, .search-box input { width: 100%; border: 1px solid #d8e0e2; border-radius: 9px; padding: 11px; outline: 0; color: #0f172a; background: #fbfdfd; font-size: 13px; }
+.field-grid input:focus, .review-panel input:focus, .review-panel textarea:focus, .search-box input:focus { border-color: #0f9f91; box-shadow: 0 0 0 3px #ccfbf1; }
+.review-panel { display: flex; flex-direction: column; gap: 15px; }
+.review-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.review-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 12px; border: 0; border-radius: 9px; color: #fff; font-size: 12px; font-weight: 750; }
+.review-actions button:disabled { cursor: wait; opacity: .55; }
+.secondary-button { color: #334155 !important; background: #e8eef0; }.approve-button { background: #0f9f91; }.reject-button { color: #fff !important; background: #c2413c; border: 1px solid #a9322e !important; }.reject-button:hover, .reject-button:focus-visible { background: #a9322e; }.reject-button:active { background: #84251f; }
+.review-note { margin: 0; color: #64748b; font-size: 12px; }.workflow-error { padding: 14px; border: 1px solid #fecaca; border-radius: 12px; color: #b42318; background: #fff5f5; }.centered { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 45vh; }
+.workflow-notice { margin-bottom: 18px; padding: 14px; border: 1px solid #bbebd2; border-radius: 12px; color: #166534; background: #f0fdf4; font-size: 13px; }
+.record-card { max-width: 900px; }.record-top { align-items: center; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }.record-top h2 { color: #16805a; }.score { color: #0f9f91; font-size: 28px; }.record-grid { margin-top: 22px; }.record-field { padding: 13px; border-radius: 10px; background: #f5faf9; }.record-field span { display: block; margin-bottom: 5px; color: #64748b; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }.record-field strong { font-size: 14px; }.record-meta { margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 12px; }.record-meta span { display: block; margin-bottom: 5px; }.record-meta p { margin: 12px 0 0; color: #334155; }.records-toolbar { align-items: center; margin-bottom: 18px; }.records-toolbar > span { color: #64748b; font-size: 12px; font-weight: 700; white-space: nowrap; }.search-box { display: flex; align-items: center; gap: 8px; width: min(560px, 100%); padding-left: 12px; border: 1px solid #d8e0e2; border-radius: 10px; color: #64748b; background: #fff; }.search-box input { border: 0; box-shadow: none; }.records-list { display: grid; gap: 9px; }.record-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 17px; border: 1px solid #dce5e6; border-radius: 13px; color: #0f172a; background: #fff; text-align: left; }.record-row:hover { border-color: #0f9f91; }.record-row strong, .record-row span { display: block; }.record-row span { margin-top: 5px; color: #64748b; font-size: 12px; }.record-row b { color: #0f9f91; }.empty-state { color: #64748b; text-align: center; }
+.error-boundary { text-align: center; }.error-boundary p { color: #64748b; }.error-boundary a { display: inline-block; margin-top: 10px; padding: 10px 14px; border-radius: 9px; color: #fff; background: #0f172a; font-size: 12px; font-weight: 750; }
+.spin { animation: workflow-spin 1s linear infinite; } @keyframes workflow-spin { to { transform: rotate(360deg); } }
+@media (max-width: 760px) { .workflow-page { padding: 36px 16px 48px; }.review-layout { grid-template-columns: 1fr; }.card-heading, .records-toolbar { align-items: flex-start; flex-direction: column; }.field-grid { grid-template-columns: 1fr; }.record-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .workflow-header { align-items: flex-start; }.workflow-header h1 { font-size: 28px; }.workflow-card { padding: 17px; }.record-grid { grid-template-columns: 1fr; }.records-toolbar > span { align-self: flex-end; } }
