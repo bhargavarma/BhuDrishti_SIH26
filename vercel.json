@@ -5,6 +5,7 @@
       "root": "./"
     },
     "backend": {
+      "runtime": "container",
       "root": "backend/",
       "entrypoint": "main:app"
     }
