@@ -1,5 +1,7 @@
 from pathlib import Path
 from typing import Dict, List
+import os
+import shutil
 
 import cv2
 import pytesseract
@@ -9,6 +11,43 @@ import pytesseract
 # Tesseract configuration
 # --------------------------------------------------
 
+def configure_tesseract() -> None:
+    """
+    Configure Tesseract differently for Windows
+    and Linux/Vercel environments.
+    """
+
+    # Local Windows development
+    if os.name == "nt":
+        windows_tesseract = (
+            r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+        )
+
+        if Path(windows_tesseract).exists():
+            pytesseract.pytesseract.tesseract_cmd = (
+                windows_tesseract
+            )
+
+        return
+
+    # Linux / Vercel environment
+    tesseract_path = shutil.which("tesseract")
+
+    if tesseract_path:
+        pytesseract.pytesseract.tesseract_cmd = (
+            tesseract_path
+        )
+
+        return
+
+    raise RuntimeError(
+        "Tesseract OCR is not installed or not available "
+        "in the server PATH."
+    )
+
+
+# Run configuration when this module loads
+configure_tesseract()
 
 
 # --------------------------------------------------
@@ -38,7 +77,11 @@ def build_layout_text(ocr_data: Dict) -> str:
             confidence = float(
                 ocr_data["conf"][index]
             )
-        except (ValueError, TypeError):
+
+        except (
+            ValueError,
+            TypeError,
+        ):
             confidence = -1
 
         # Ignore completely invalid OCR entries.
@@ -46,7 +89,9 @@ def build_layout_text(ocr_data: Dict) -> str:
             continue
 
         block_number = ocr_data["block_num"][index]
+
         paragraph_number = ocr_data["par_num"][index]
+
         line_number = ocr_data["line_num"][index]
 
         key = (
@@ -107,23 +152,58 @@ def extract_text_from_image(
     to identify.
     """
 
-    image = cv2.imread(str(image_path))
+    print(
+        f"[OCR] Starting OCR for: {image_path}"
+    )
+
+    print(
+        f"[OCR] Image exists: "
+        f"{image_path.exists()}"
+    )
+
+    print(
+        f"[OCR] Tesseract command: "
+        f"{pytesseract.pytesseract.tesseract_cmd}"
+    )
+
+    image = cv2.imread(
+        str(image_path)
+    )
 
     if image is None:
+
         raise ValueError(
             f"Unable to read image: {image_path}"
         )
+
+    print(
+        f"[OCR] Image shape: "
+        f"{image.shape}"
+    )
 
     # --------------------------------------------------
     # OCR data
     # --------------------------------------------------
 
-    ocr_data = pytesseract.image_to_data(
-        image,
-        lang=language,
-        config="--psm 11",
-        output_type=pytesseract.Output.DICT,
-    )
+    try:
+
+        ocr_data = pytesseract.image_to_data(
+            image,
+            lang=language,
+            config="--psm 11",
+            output_type=pytesseract.Output.DICT,
+        )
+
+    except Exception as error:
+
+        print(
+            f"[OCR ERROR] Tesseract failed: "
+            f"{type(error).__name__}: {error}"
+        )
+
+        raise RuntimeError(
+            f"OCR processing failed: {error}"
+        ) from error
 
     # --------------------------------------------------
     # Reconstruct layout-aware text
@@ -142,12 +222,20 @@ def extract_text_from_image(
     for confidence in ocr_data["conf"]:
 
         try:
+
             value = float(confidence)
 
             if value >= 0:
-                confidence_values.append(value)
 
-        except (ValueError, TypeError):
+                confidence_values.append(
+                    value
+                )
+
+        except (
+            ValueError,
+            TypeError,
+        ):
+
             continue
 
     if confidence_values:
@@ -158,10 +246,19 @@ def extract_text_from_image(
         )
 
     else:
+
         average_confidence = 0.0
 
+    print(
+        f"[OCR] Completed successfully. "
+        f"Text length={len(text.strip())}, "
+        f"Confidence={average_confidence:.2f}"
+    )
+
     return {
+
         "text": text.strip(),
+
         "confidence": round(
             average_confidence,
             2,
@@ -187,6 +284,11 @@ def extract_text_from_pages(
         image_paths,
         start=1,
     ):
+
+        print(
+            f"[OCR] Processing page "
+            f"{page_number}/{len(image_paths)}"
+        )
 
         result = extract_text_from_image(
             image_path=image_path,
