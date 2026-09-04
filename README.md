@@ -1,46 +1,84 @@
 # BhuDrishti_SIH26
 
-AI-powered land record digitization, validation, human verification, and GIS visualization platform for SIH 2026.
+AI-Powered Land Record Intelligence and Validation System
+
+BhuDrishti digitizes scanned land records using OCR and AI-assisted extraction, validates extracted information, supports human verification, stores approved digital records, and provides a GIS visualization layer for verified land parcels.
 
 ## Overview
 
-BhuDrishti converts scanned land records into structured digital records using OCR and AI-assisted field extraction. Records pass through validation and human verification before approved data is persisted and made available through the records registry, application GIS view, and JSON export.
+This project combines a React + TypeScript + Vite frontend with a FastAPI Python backend to manage the end-to-end flow for land-record processing:
+
+- Upload scanned land record documents
+- Preprocess document images for OCR readiness
+- Extract structured fields from scanned text
+- Validate extracted information against rules
+- Support human verification workflows
+- Store approved records in a local SQLite database for development
+- Visualize verified records on a GIS map layer
 
 ## Workflow
 
-Upload -> Preprocess -> OCR -> AI Field Extraction -> Multi-Tier Validation -> Human Verification -> Approved Digital Record -> GIS / Export
+Upload
+→ Preprocess
+→ OCR
+→ AI Field Extraction
+→ Multi-Tier Validation
+→ Human Verification
+→ Approved Digital Record
+→ GIS / Export
 
 ## Architecture
 
-- React, TypeScript, Vite, React Router, and Lucide React frontend
-- FastAPI and Python backend
-- OpenCV preprocessing
-- PyMuPDF PDF rendering
-- Tesseract OCR through pytesseract
-- SQLAlchemy with SQLite for development persistence
-- Leaflet and React Leaflet application-level GIS visualization
+- Frontend: React + TypeScript + Vite
+- Backend: FastAPI + Python
+- OCR: Tesseract + OpenCV + PyMuPDF
+- Data layer: SQLAlchemy + SQLite (development)
+- GIS: frontend map visualization using deterministic demo parcel coordinates
+- Validation: rule-based validation and review workflow
+
+## GIS Disclaimer
+
+The current GIS visualization is an application-level verified-record map using deterministic demonstration coordinates where actual cadastral coordinates are unavailable. This project is not a live integration with DILRMP, ULPIN, Bhu-Aadhaar, NGDRS, RCCMS, or e-Courts. Any such integrations are planned future enhancements and are not implemented in the current codebase.
 
 ## Project Structure
 
 ```text
-src/                 React application, pages, components, layouts, and API service
-backend/app/         FastAPI application, models, schemas, and pipeline services
-backend/requirements.txt
-public/              Static frontend assets
+intelliland-ai/
+├── src/                     # React frontend source
+├── public/                  # Static frontend assets
+├── backend/
+│   ├── app/
+│   │   ├── core/            # Database config and bootstrapping
+│   │   ├── models/          # SQLAlchemy models
+│   │   ├── schemas/         # Pydantic/API schemas
+│   │   ├── services/        # OCR, extraction, preprocessing, validation
+│   │   └── main.py          # FastAPI application entrypoint
+│   ├── data/               # Local runtime data (ignored in Git)
+│   ├── uploads/            # Uploaded documents (ignored in Git)
+│   ├── processed/          # Processed files (ignored in Git)
+│   └── requirements.txt    # Python backend dependencies
+├── index.html
+├── package.json
+├── vite.config.ts
+├── tsconfig*.json
+├── .env.example            # Example environment variables
+├── .gitignore
+├── README.md
+└── package-lock.json
 ```
 
-## Setup
+## Frontend Setup
 
-### Frontend
-
-```powershell
+```bash
 npm install
 npm run dev
 ```
 
-The frontend runs at `http://localhost:5173`.
+Frontend URL:
 
-### Backend
+- http://localhost:5173
+
+## Backend Setup
 
 ```powershell
 python -m venv .venv
@@ -49,24 +87,19 @@ pip install -r backend\requirements.txt
 python -m uvicorn backend.app.main:app --reload
 ```
 
-The API runs at `http://127.0.0.1:8000`. Health check: `GET /api/health`.
+Backend API base URL:
 
-Install Tesseract OCR separately on Windows. The current backend expects the executable at `C:\Program Files\Tesseract-OCR\tesseract.exe` unless the OCR configuration is changed.
+- http://127.0.0.1:8000
 
-### Environment
+Health check:
 
-Copy `.env.example` to a local `.env` when needed. Do not commit local environment files or secrets.
+- http://127.0.0.1:8000/api/health
 
-## API Workflow
+## OCR Requirement
 
-The backend provides upload, preprocessing, OCR, extraction, validation, human review, approved-record, records, GIS, and export endpoints under `/api`.
+Tesseract OCR must be installed on Windows and configured appropriately for the backend to extract text from scanned land records.
 
-## GIS Disclaimer
+## Notes
 
-The current GIS view is an application-level verified-record map. It uses deterministic demonstration coordinates and small parcel polygons when authoritative coordinates are unavailable. These locations are not official cadastral coordinates.
-
-BhuDrishti does not currently claim live integration with DILRMP, ULPIN/Bhu-Aadhaar, NGDRS, RCCMS, e-Courts, or government cadastral GIS services. Those are future integration possibilities.
-
-## Security and Runtime Data
-
-Local uploads, processed pages, SQLite databases, virtual environments, build output, caches, logs, and environment files are excluded through `.gitignore`. Never commit real citizens' land records, personally identifiable documents, credentials, or private keys.
+- This repository intentionally excludes local runtime artifacts, generated data, virtual environments, secrets, and machine-specific files.
+- The source code remains committed so the project can be recreated locally and run with the provided setup steps.

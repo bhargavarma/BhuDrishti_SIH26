@@ -1,63 +1,93 @@
-# Node
+# Node / frontend build artifacts
 node_modules/
 dist/
+dist-ssr/
 .vite/
 .npm/
+coverage/
+.cache/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+*.local
 
-# Environment and secrets
+# Environment / secrets
 .env
 .env.*
 !.env.example
 *.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.envrc
 
 # Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+*.so
 .Python
-.venv/
-venv/
-env/
-ENV/
-backend/.venv/
-
-# Python tooling
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 htmlcov/
+.pytype/
 
-# SQLite and runtime data
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+backend/.venv/
+backend/venv/
+backend/env/
+
+# SQLite / local databases
 *.db
 *.sqlite
 *.sqlite3
+backend/data/
 backend/uploads/
 backend/processed/
-backend/data/
+uploads/
+processed/
+data/
 
-# Generated output and caches
+# Generated / temporary output
 *.tmp
 *.temp
-coverage/
-.cache/
+*.bak
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea/
+# OS / editor
 .DS_Store
 Thumbs.db
 desktop.ini
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.vscode/
+!.vscode/extensions.json
+.idea/
+
+# Keep source code tracked
+!src/
+!backend/app/
+!package.json
+!package-lock.json
+!backend/requirements.txt
+!README.md
+!tsconfig*.json
+!vite.config.ts
+!index.html
+!eslint.config.js
+!public/
+!backend/app/**/*.py
+!backend/app/**/*.json
+!src/**/*.ts
+!src/**/*.tsx
+!src/**/*.css
+!src/**/*.js
+!src/**/*.jsx
