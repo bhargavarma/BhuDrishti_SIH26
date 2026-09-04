@@ -19,6 +19,9 @@ RUNTIME_ROOT = (
 
 DATABASE_DIR = RUNTIME_ROOT / "data"
 
+# Create the database directory before SQLite connects
+DATABASE_DIR.mkdir(parents=True, exist_ok=True)
+
 DATABASE_PATH = DATABASE_DIR / "intelliland.db"
 
 
