@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -10,8 +11,13 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
-DATABASE_DIR = BASE_DIR / "data"
-DATABASE_DIR.mkdir(parents=True, exist_ok=True)
+RUNTIME_ROOT = (
+    Path("/tmp/intelliland")
+    if os.getenv("VERCEL")
+    else BASE_DIR
+)
+
+DATABASE_DIR = RUNTIME_ROOT / "data"
 
 DATABASE_PATH = DATABASE_DIR / "intelliland.db"
 

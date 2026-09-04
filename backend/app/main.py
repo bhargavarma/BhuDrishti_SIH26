@@ -6,9 +6,8 @@ import json
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from sqlalchemy import inspect, text
 
-from .core.database import SessionLocal
+from .core.database import RUNTIME_ROOT, SessionLocal
 from .models.land_record import LandRecord
 
 from .services.preprocessing.processor import preprocess_document
@@ -58,27 +57,8 @@ app.add_middleware(
 # Paths
 # ==================================================
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-UPLOAD_DIR = PROJECT_ROOT / "backend" / "uploads"
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-
-PROCESSED_DIR = PROJECT_ROOT / "backend" / "processed"
-PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def ensure_gis_columns() -> None:
-    inspector = inspect(SessionLocal.kw.get("bind"))
-    columns = {column["name"] for column in inspector.get_columns("land_records")}
-    with SessionLocal.kw["bind"].begin() as connection:
-        for name, sql_type in (("latitude", "REAL"), ("longitude", "REAL"), ("parcel_geojson", "TEXT")):
-            if name not in columns:
-                connection.execute(text(f"ALTER TABLE land_records ADD COLUMN {name} {sql_type}"))
-
-
-try:
-    ensure_gis_columns()
-except Exception:
-    logger.exception("Unable to apply optional GIS columns")
+UPLOAD_DIR = RUNTIME_ROOT / "uploads"
+PROCESSED_DIR = RUNTIME_ROOT / "processed"
 
 
 def demo_gis_data(document_id: str, latitude: float | None = None, longitude: float | None = None, parcel_geojson: str | None = None) -> dict:
@@ -177,6 +157,8 @@ async def upload_document(
     upload_path = (
         UPLOAD_DIR / saved_filename
     )
+
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
     logger.info(
         "[UPLOAD] document_id=%s input_path=%s",
