@@ -142,3 +142,4 @@ class LandRecord(Base):
         onupdate=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
+Base.metadata.create_all(bind=engine)    
