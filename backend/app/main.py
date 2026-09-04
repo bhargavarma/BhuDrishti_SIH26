@@ -7,9 +7,9 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from .core.database import RUNTIME_ROOT, SessionLocal
+from .core.database import RUNTIME_ROOT, SessionLocal, Base, engine
 from .models.land_record import LandRecord
-
+Base.metadata.create_all(bind=engine)
 from .services.preprocessing.processor import preprocess_document
 from .services.ocr.ocr_engine import extract_text_from_pages
 from .services.extraction.field_extractor import (
